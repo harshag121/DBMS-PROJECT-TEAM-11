@@ -1,0 +1,57 @@
+-- File: all_procedures_triggers_functions.sql
+
+-- Procedures
+DELIMITER //
+
+-- Procedure 1
+CREATE PROCEDURE create_student(IN name VARCHAR(255), IN roll_number INT, IN age INT, IN grade VARCHAR(10))
+BEGIN
+    INSERT INTO students (name, roll_number, age, grade) VALUES (name, roll_number, age, grade);
+    COMMIT;
+END //
+
+-- Procedure 2
+CREATE PROCEDURE create_teacher(IN name VARCHAR(255), IN subject VARCHAR(255))
+BEGIN
+    INSERT INTO teachers (name, subject) VALUES (name, subject);
+    COMMIT;
+END //
+
+-- Procedure 3
+-- Add more procedures as needed
+
+//
+
+DELIMITER ;
+
+-- Triggers
+DELIMITER //
+
+-- Trigger 1
+CREATE TRIGGER student_updated
+BEFORE UPDATE ON students
+FOR EACH ROW
+SET NEW.last_modified = NOW();
+
+-- Trigger 2
+-- Add more triggers as needed
+
+//
+
+DELIMITER ;
+
+-- Functions
+DELIMITER //
+
+-- Function 1
+CREATE FUNCTION CalculateAge(dob DATE) RETURNS INT
+BEGIN
+    RETURN YEAR(CURDATE()) - YEAR(dob);
+END //
+
+-- Function 2
+-- Add more functions as needed
+
+//
+
+DELIMITER ;
